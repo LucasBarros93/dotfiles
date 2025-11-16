@@ -12,4 +12,7 @@ vim.opt.undofile = true
 vim.keymap.set("i", "jk", "<Esc>", { noremap = false })
 vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>", { silent = true })
 
+vim.keymap.set("n", "<leader>o", ":put _<CR>", { silent = true })
+vim.keymap.set("n", "<leader>O", ":put! _<CR>", { silent = true })
+
 require("config.lazy")
