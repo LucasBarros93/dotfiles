@@ -90,4 +90,4 @@ export FZF_DEFAULT_OPTS='
   
 '
 
-
+if [ -f ~/.zshrc.local ]; then source ~/.zshrc.local; fi

@@ -5,3 +5,4 @@
 *.out
 /kitty/*theme*
 /tmux/plugins/
+*.local
