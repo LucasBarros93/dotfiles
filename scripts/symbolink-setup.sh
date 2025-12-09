@@ -24,6 +24,8 @@ PACKAGES=(
 	"rofi"
 
 	"bat"
+
+    "fastfetch"
 )
 
 normal_symbolinks() {
