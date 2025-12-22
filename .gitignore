@@ -3,6 +3,6 @@
 *.swp
 *.cache
 *.out
-/kitty/*theme*
 /tmux/plugins/
+/nvim/lazy-lock.json
 *.local
