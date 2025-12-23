@@ -1,10 +1,13 @@
 #!/bin/bash
 
+# ================= COLORS =================
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 WHITE='\033[0;37m'
 
+
+# ================= PACKAGES =================
 X11=(
     "xorg-server"
     "xorg-xinit"
@@ -26,37 +29,44 @@ X11=(
 )
 
 PACKAGES=(
+    # WM
 	"bspwm"
 	"sxhkd"
 	"picom"
 
+    # TEXT EDITOR
 	"nvim"
 
+    # SHELL
 	"kitty"
 	"tmux"
 
+    # UTILS
 	"polybar"
 	"rofi"
 
+    # PRETTY
 	"bat"
-
     "fastfetch"
+    "feh"
 
+    # SPECIAL FONTS 
     "noto-fonts-cjk"
     "ttf-thai-tlw"
     "noto-fonts"
     "noto-fonts-extra"
 
-    "feh"
-
+    # NORMAL FONTS
     "ttf-jetbrains-mono-nerd"
     "ttf-font-awesome"
 
+    # PRINTSCREEN
     "escrotum-git"
     "at"
     "xclip"
 )
 
+# ================= YAY/GIT =================
 essential_installation() {
     echo -e "${WHITE}Installing git and base-devel..."
 
@@ -93,6 +103,7 @@ essential_installation() {
     echo -e "${GREEN}yay installed successfully"
 }
 
+# ================= X11 =================
 x11_instalation() {
     echo -e "${WHITE}Starting x11 installation"
 
@@ -102,11 +113,12 @@ x11_instalation() {
             echo -e "${GREEN}$package instaled"
         else
             echo -e "${RED}$ failed"
-        if
+        fi
 
     done
 }
 
+# ================= USAGE INSTALLATION =================
 normal_instalation() {
     echo -e "${WHITE}Starting normal installation"
 
@@ -116,13 +128,14 @@ normal_instalation() {
             echo -e "${GREEN}$package instaled"
         else
             echo -e "${RED}$ failed"
-        if
+        fi
 
     done
 }
 
+# ================= MAIN =================
 main() {
-	echo -e "${BLUE}  INSTALL SETUP"
+	echo -e "${BLUE}  INSTALL SETUP"
 	echo -e "${BLUE}=========================="
 
     essential_installation
@@ -132,7 +145,6 @@ main() {
 	echo -e "${BLUE} Done!"
 }
 
-# Só executa se for chamado diretamente
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 	main "$@"
 fi

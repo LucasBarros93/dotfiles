@@ -1,33 +1,42 @@
 #!/bin/bash
 
+# ================= COLORS =================
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 WHITE='\033[0;37m'
 
+# ================= PATHS =================
 DOTFILE_DIR="$(dirname $(cd $(dirname $BASH_SOURCE) && pwd))"
 CONFIG_DIR="$HOME/.config"
 
 ZSH_DIR="$DOTFILE_DIR/zsh"
+XINIT_DIR="$DOTFILE_DIR/xinit"
+GREETD_DIR="$DOTFILE_DIR/greetd"
 
 PACKAGES=(
+    # WM
 	"bspwm"
 	"sxhkd"
 	"picom"
 
+    # TEXT EDITOR
 	"nvim"
 
+    # SHELL
 	"kitty"
 	"tmux"
 
+    # UTILS
 	"polybar"
 	"rofi"
 
+    # PRETTY
 	"bat"
-
     "fastfetch"
 )
 
+# ================= FUNCTIONS =================
 normal_symbolinks() {
 
 	for package in ${PACKAGES[@]}; do
@@ -45,14 +54,44 @@ normal_symbolinks() {
 }
 
 zsh_symbolinks() {
-	echo -e "${WHITE}Symbolink $ZSH_DIR/.zshrc -> $HOME/.zsh"
+    if [[ -f "$HOME/.zshrc" ]]; then
+        echo -e "${RED}Moving the exist .zshrc to .zshrc.bak"
+        mv $HOME/.zshrc $HOME/.zshrc.bak
+	fi
+
+	echo -e "${WHITE}Symbolink $ZSH_DIR/.zshrc -> $HOME/.zshrc"
 	ln -sf $ZSH_DIR/.zshrc $HOME/.zshrc
+
+    if [[ -f "$HOME/.p10k.zsh" ]]; then
+        echo -e "${RED}Moving the exist .p10k.zsh to .p10k.zsh.bak"
+        mv $HOME/.p10k.zsh $HOME/.p10k.zsh.bak
+	fi
 
 	echo -e "${WHITE}Symbolink $ZSH_DIR/.p10k.zsh -> $HOME/.p10k.zsh"
 	ln -sf $ZSH_DIR/.p10k.zsh $HOME/.p10k.zsh
 
 }
 
+copy_files() {
+    if [[ -f "$HOME/.xinitrc" ]]; then
+        echo -e "${RED}Moving the exist .xinitrc to .xinitrc.bak"
+        mv $HOME/.xinitrc $HOME/.xinitrc.bak
+	fi
+
+	echo -e "${WHITE}Copy $XINIT_DIR/.xinitrc -> $HOME/.xinitrc"
+	cp $XINIT_DIR/.xinitrc $HOME/.xinitrc
+
+    if [[ ! -f "/etc/greetd/config.toml" ]]; then
+        echo -e "${WHITE}Copy $GREETD_DIR/config.toml -> /etc/greetd/config.toml"
+        sudo cp $GREETD_DIR/config.toml /etc/greetd/config.toml
+        echo -e "${RED} You need to start the greetd.service"
+    else
+        echo -e "${RED}Greetd config already exists"
+	fi
+
+}
+
+# ================= MAIN =================
 main() {
 	echo -e "${BLUE}  DOTFILES SYMLINK SETUP"
 	echo -e "${BLUE}  Dotfiles: $DOTFILE_DIR"
@@ -67,6 +106,7 @@ main() {
 
 	normal_symbolinks
 	zsh_symbolinks
+    copy_files
 
 	echo -e "${BLUE} Done!"
 }
