@@ -47,6 +47,8 @@ PACKAGES=(
     "noto-fonts"
     "noto-fonts-extra"
 
+    "feh"
+
     "ttf-jetbrains-mono-nerd"
     "ttf-font-awesome"
 
