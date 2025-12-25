@@ -64,6 +64,10 @@ PACKAGES=(
     "escrotum-git"
     "at"
     "xclip"
+
+    # DM
+    "greetd"
+    "greetd-tuigreet"
 )
 
 # ================= YAY/GIT =================

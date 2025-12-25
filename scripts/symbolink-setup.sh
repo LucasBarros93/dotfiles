@@ -81,13 +81,21 @@ copy_files() {
 	echo -e "${WHITE}Copy $XINIT_DIR/.xinitrc -> $HOME/.xinitrc"
 	cp $XINIT_DIR/.xinitrc $HOME/.xinitrc
 
-    if [[ ! -f "/etc/greetd/config.toml" ]]; then
-        echo -e "${WHITE}Copy $GREETD_DIR/config.toml -> /etc/greetd/config.toml"
-        sudo cp $GREETD_DIR/config.toml /etc/greetd/config.toml
-        echo -e "${RED} You need to start the greetd.service"
-    else
-        echo -e "${RED}Greetd config already exists"
+    if [[ -f "/etc/greetd/config.toml" ]]; then
+        echo -e "${RED}Moving the exist config.toml to config.toml.bak (greetd)"
+        sudo mv /etc/greetd/config.toml /etc/greetd/config.toml.bak
 	fi
+
+    echo -e "${WHITE}Copy $GREETD_DIR/config.toml -> /etc/greetd/config.toml"
+    sudo cp $GREETD_DIR/config.toml /etc/greetd/config.toml
+    echo -e "${RED}You need to start the greetd.service"
+
+    if [[ ! -f "$HOME/Pictures/wpp/wpp.png" ]]; then
+        echo -e "${WHITE}Copy $DOTFILE_DIR/bspwm/wpp.png -> $HOME/Pictures/wpp/wpp.png"
+        cp $DOTFILE_DIR/bspwm/wpp.png $HOME/Pictures/wpp/wpp.png
+    else
+        echo -e "${RED}Wallpaper file already exists"
+    fi
 
 }
 
