@@ -2,13 +2,15 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
+		--require('transparent').clear_prefix('lualine')
 		require("lualine").setup({
 			options = {
-				theme = "rose-pine",
+				theme = "horizon",
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "", right = "" },
 				icons_enabled = true,
 				disabled_filetypes = {},
+				globalstatus = true,
 			},
 			sections = {
 				lualine_a = { "mode" },
@@ -29,5 +31,9 @@ return {
 			tabline = {},
 			extensions = {},
 		})
+		local transparent = require("transparent")
+		for _, p in ipairs({ "lualine_b", "lualine_c", "lualine_x", "lualine_y" }) do
+			transparent.clear_prefix(p)
+		end
 	end,
 }

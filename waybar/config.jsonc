@@ -1,0 +1,230 @@
+{
+    "spacing": 10, // Gaps between modules (4px)
+    "margin-bottom": 0,
+    "margin-top": 7,
+    "margin-right": 15,
+    "margin-left": 15,
+
+    "modules-left": [
+        "group/clockmodule",
+        "group/soundlight",
+        "group/media"
+    ],
+    "modules-center": [
+        "niri/workspaces"
+    ],
+    "modules-right": [
+        "temperature",
+        "group/hardware",
+        "battery"
+    ],
+
+    "niri/workspaces": {
+            "format": "{name}",
+            "on-click": "activate",
+            "all-outputs": true,
+            "disable-scroll": false
+    },
+    "group/clockmodule": {
+        "orientation": "horizontal",
+        "modules": ["clock#base", "clock#hover"],
+        "tooltip": false
+      }, 
+
+    "clock#base": {
+        "interval": 1,
+        "timezone": "America/Sao_Paulo",
+        "format": " {:%H:%M}",
+        "tooltip": false
+    },
+    "clock#hover": {
+        "interval": 1,
+        "timezone": "America/Sao_Paulo",
+        "format": " {:%b %d, %Y}",
+        "tooltip": true, 
+        "tooltip-format": "\n<tt>{calendar}</tt>",
+        "calendar": {
+            "mode"          : "mounth",
+            "mode-mon-col"  : 3,
+            "on-scroll"     : 1,
+            "format": {
+                "months":     "<span color='#FADAD1'><b>{}</b></span>",
+                "days":       "<span color='#6C6F93'><b>{}</b></span>",
+                "weekdays":   "<span color='#59E3E3'><b>{}</b></span>",
+                "today":      "<span color='#EE64AE'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions":  {
+            "on-click": "mode",
+            "on-click-right": "shift_up",
+            "on-clcik-middle": "shift_down"
+        }
+    },
+
+    "custom/separator": {
+        "format": "",
+        "tooltip": false
+    },
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": ["group/networkmodule", "custom/separator", "group/cpumodule", "custom/separator", "group/memorymodule"]
+    },
+    "group/networkmodule": {
+        "orientation": "horizontal",
+        "modules": ["network#hover", "network#base"],
+        "tooltip": false
+    }, 
+    "network#base": {
+        "format": "{icon}",
+        "format-ethernet": "",
+        "format-disconnected": "󰤮",
+        "tooltip": true,
+        "tooltip-format-wifi": "{signalStrength}%",
+        "tooltip-format-disconnected": ":(",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "on-click": "kitty --class=kitty-float --title='Impala' -e tmux new-session -A -s Impala 'impala'"
+    },
+    "network#hover": {
+        "format": "",
+        "format-wifi": "{essid} ",
+        "format-ethernet": "{ifname} ",
+        "tooltip": true,
+        "tooltip-format-wifi": "{signalStrength}%",
+        "tooltip-format-disconnected": ":("
+    },
+
+    "group/cpumodule": {
+        "orientation": "horizontal",
+        "modules": ["cpu#hover", "cpu#base"],
+        "tooltip": false
+    }, 
+    "cpu#base": {
+        "format": "",
+        "states": { "warning": 70, "critical": 85 },
+        "tooltip": false,
+        "on-click": "kitty --class=kitty-float --title='Btop' -e tmux new-session -A -s Btop 'btop'"
+    },
+    "cpu#hover": {
+        "format": " {usage}%",
+        "tooltip": false
+    },
+
+    "group/memorymodule": {
+        "orientation": "horizontal",
+        "modules": ["memory#hover", "memory#base"],
+        "tooltip": false
+    }, 
+    "memory#base": {
+        "format": "",
+        "states": { "warning": 60, "critical": 85 },
+        "tooltip": true,
+        "tooltip-format": "{used:0.1f}G / {total:0.1f}G",
+        "on-click": "kitty --class=kitty-float --title='Btop' -e tmux new-session -A -s Btop 'btop'"
+    },
+    "memory#hover": {
+        "format": " {percentage}%",
+        "tooltip": true,
+        "tooltip-format": "{used:0.1f}G / {total:0.1f}G"
+    },
+
+    "group/soundlight": {
+        "orientation": "horizontal",
+        "modules": ["group/pulseaudiomodule", "custom/separator", "group/backlightmodule"]
+    },
+
+    "group/pulseaudiomodule": {
+        "orientation": "horizontal",
+        "modules": ["pulseaudio", "pulseaudio/slider"],
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "max-volume": 120,
+        "format": "{icon}",
+        "format-bluetooth": "{icon}  ",
+        "format-bluetooth-muted": "{icon} ",
+        "format-muted": "󰝟",
+        "format-icons": {
+            // "headphone": "",
+            // "hands-free": "",
+            // "headset": "",
+            // "phone": "",
+            // "portable": "",
+            // "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "kitty --class=kitty-float --title='WireMix' -e tmux new-session -A -s Wiremix 'wiremix'",
+        "on-click-right": "kitty --class=kitty-float --title='Bluetui' -e tmux new-session -A -s Bluetui 'bluetui'"
+    },
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 120,
+        "orientation": "horizontal"
+    },
+
+    "group/backlightmodule": {
+        "orientation": "horizontal",
+        "modules": ["backlight", "backlight/slider"],
+        "tooltip": false
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}",
+        "format-icons": ["", "󱎖", ""]
+    },
+    "backlight/slider": {
+        "device": "intel_backlight",
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+
+    "group/media": {
+        "orientation": "horizontal",
+        "modules": ["mpris", "custom/note"],  // mpris à esquerda, notinha à direita
+        "tooltip": true
+    },
+
+    "custom/note": {
+        "format": " ",
+        "tooltip": false
+    },
+    "mpris": {
+        "player": ["spotify"],   // ordem de preferência
+        "ignored-players" : ["firefox"],
+        "interval": 1,
+        "ellipsis": "…",
+        "max-length": 25,
+        // Toca mostrando "Artista - Música "
+        "format": "{title} - {artist} ",
+
+        // Controles
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous",
+        "on-scroll-up": "playerctl position 5+",
+        "on-scroll-down": "playerctl position 5-"
+    },
+
+    "temperature": {
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", "", ""],
+        "tooltip": false
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% {icon}", //
+        "format-plugged": "󱞝", //
+        "format-alt": "{time} {icon}",
+        "format-icons": {
+            "default":["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+            "charging":["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
+        }
+    }
+}

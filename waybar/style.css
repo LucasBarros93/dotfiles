@@ -1,0 +1,218 @@
+@define-color bg  #16161C;
+@define-color fg  #232530;
+@define-color fg2 #1C1E26;
+
+@define-color blue   #26BBD9;
+@define-color cyan   #59E3E3;
+@define-color green  #29D398;
+@define-color pink   #EE64AE;
+@define-color red    #E95678;
+@define-color orange #FAB795;
+@define-color gray   #6C6F93;
+
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: "PixelCode", "Symbols Nerd Font Mono", monospace;
+    font-size: 12.5px;
+    font-weight: 500;
+
+    min-height: 0;
+    padding: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+}
+
+#workspaces {
+    padding: 0 6px;
+    background-color: @bg;
+    border-radius: 13px;
+}
+#workspaces button {
+    padding: 0;
+    margin: 6px 4px;
+    min-width: 12px;
+    min-height: 10px;
+    border-radius: 20px;
+    background: @fg; 
+    color: transparent;
+    box-shadow: none;
+    transition: all 0.5s ease-in-out;
+}
+
+#workspaces button:hover {
+    background: @fg2;
+    border-color: @cyan;
+    min-width: 24px;     
+}
+
+#workspaces button.active,
+#workspaces button.focused,
+#workspaces button.visible {
+    background: @cyan;  
+    min-width: 36px;     
+}
+
+#workspaces button.urgent {
+    background: @red;
+    min-width: 36px;
+}
+
+#clockmodule,
+#battery,
+#temperature,
+#hardware,
+#soundlight,
+#media,
+#mpd {
+    padding: 0 10px;
+    border-radius: 15px;
+    background-color: @bg;
+}
+
+tooltip {
+  background: @bg;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+#clock {
+    color: @pink;
+}
+/* Estado normal: mostra base e esconde hover */
+#clock.hover { font-size: 0;  transition: font-size .2s; } 
+
+/* No hover: mostra hover */
+#clockmodule:hover #clock.hover{ font-size: 12.5px; }
+
+#battery {
+    color: @pink;
+}
+
+@keyframes blink {
+    to {
+        color: @gray;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    color: @red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-separator {
+    color: @fg;
+    margin: 0 2px;
+    padding: 0;
+}
+
+#cpu.base,
+#memory.base,
+#network.base {
+    color: @green;
+    margin: 0 7px;
+    padding: 0;
+}
+#network.base {
+    margin-left: 1px;
+}
+
+#network.hover { font-size: 0;  transition: font-size .2s; color: @gray;} 
+
+#networkmodule:hover #network.hover{ font-size: 12.5px; }
+
+#network.disconnected {
+    color: @gray;
+}
+
+#cpu.base.warning { color: @blue;}
+#cpu.base.critical { color: @red;}
+
+#cpu.hover { font-size: 0;  transition: font-size .2s; color: @gray;} 
+
+#cpumodule:hover #cpu.hover{ font-size: 12.5px; }
+
+#memory.base.warning { color: @blue;}
+#memory.base.critical { color: @red;}
+
+#memory.hover { font-size: 0;  transition: font-size .2s; color: @gray;} 
+
+#memorymodule:hover #memory.hover{ font-size: 12.5px; }
+
+#pulseaudio,
+#backlight {
+    color: @green;
+    margin: 0 8px;
+    padding: 0;
+}
+#pulseaudio{
+    margin-left: 4px;
+}
+
+#pulseaudio.muted {
+    color: @gray;
+}
+
+#pulseaudio-slider,
+#backlight-slider {
+    min-width: 0px;
+    margin-left: 2px;
+    transition: all 0.3s ease-in-out;
+}
+#pulseaudio-slider slider,
+#backlight-slider slider {
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+#pulseaudio-slider trough,
+#backlight-slider trough {
+    min-height: 0px;
+    min-width: 0px;
+    border-radius: 20px;
+    border: none;
+    background: @fg;
+    transition: all 0.3s ease-in-out;
+}
+#pulseaudio-slider highlight,
+#backlight-slider highlight {
+    border-radius: 20px;
+    background: @green;
+    transition: all 0.3s ease-in-out;
+}
+
+#pulseaudiomodule:hover #pulseaudio-slider{ min-width: 70px; }
+#pulseaudiomodule:hover #pulseaudio-slider trough { min-height: 2px; min-width: 70px; }
+
+#backlightmodule:hover #backlight-slider { min-width: 70px; }
+#backlightmodule:hover #backlight-slider trough { min-height: 2px; min-width: 70px; }
+
+#temperature {
+    color: @orange;
+}
+
+#temperature.critical {
+    color: @red;
+}
+
+#mpris {
+    color: @orange;
+    padding: 0;
+}
+#mpris.paused {
+    color: @gray;
+}
+
+/* Notinha: padrão apagada */
+#custom-note {
+    color: @orange; 
+    margin-right: 6px;
+    padding: 0;
+    transition: color .15s ease;
+} 
