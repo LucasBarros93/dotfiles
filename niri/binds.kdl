@@ -90,30 +90,31 @@ binds {
     Mod+Ctrl+Home { move-column-to-first; }
     Mod+Ctrl+End  { move-column-to-last; }
 
-    Super+Ctrl+Left  { focus-monitor-left; }
-    Super+Ctrl+Down  { focus-monitor-down; }
-    Super+Ctrl+Up    { focus-monitor-up; }
-    Super+Ctrl+Right { focus-monitor-right; }
-    Super+Ctrl+H     { focus-monitor-left; }
-    Super+Ctrl+J     { focus-monitor-down; }
-    Super+Ctrl+K     { focus-monitor-up; }
-    Super+Ctrl+L     { focus-monitor-right; }
+    Super+n { focus-monitor-left; }
+    // Super+Ctrl+Down  { focus-monitor-down; }
+    // Super+Ctrl+Up    { focus-monitor-up; }
+    Super+m { focus-monitor-right; }
+    // Super+Ctrl+H     { focus-monitor-left; }
+    // Super+Ctrl+J     { focus-monitor-down; }
+    // Super+Ctrl+K     { focus-monitor-up; }
+    // Super+Ctrl+L     { focus-monitor-right; }
 
-    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
-    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+    Super+Shift+n { move-window-to-monitor-left; }
+    // Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    // Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    Super+Shift+m { move-window-to-monitor-right; }
+    // Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    // Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    // Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    // Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
     // ...
 
     // And you can also move a whole workspace to another monitor:
-    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+    Super+Alt+n { move-workspace-to-monitor-left; }
+    Super+Alt+m { move-workspace-to-monitor-right; }
     // ...
 
     Mod+Page_Down      { focus-workspace-down; }

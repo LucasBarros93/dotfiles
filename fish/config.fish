@@ -3,10 +3,10 @@ if status is-interactive
     set -Ux EDITOR nvim
     set -Ux VISUAL nvim
 
+    alias ls='eza --icons=auto --group-directories-first --color=auto'
+
     fish_vi_key_bindings
     bind -M insert -m default jk backward-char force-repaint
-
-    thefuck --alias | source
 
     if status is-interactive
     and not set -q TMUX
