@@ -11,13 +11,22 @@ return {
 				-- Python
 				null_ls.builtins.formatting.black,
 
-                -- Bash
-                null_ls.builtins.formatting.shfmt,
+				-- Bash
+				null_ls.builtins.formatting.shfmt,
+
+				-- Go
+				null_ls.builtins.formatting.gofumpt, 
+				null_ls.builtins.formatting.goimports,
 
 				-- C / C++
-                null_ls.builtins.formatting.clang_format.with({
-                    extra_args = { "--style=file", "--fallback-style=LLVM", "--assume-filename", vim.fn.expand("~/.config/nvim/clang-format") },
-                }),
+				null_ls.builtins.formatting.clang_format.with({
+					extra_args = {
+						"--style=file",
+						"--fallback-style=LLVM",
+						"--assume-filename",
+						vim.fn.expand("~/.config/nvim/clang-format"),
+					},
+				}),
 			},
 		})
 

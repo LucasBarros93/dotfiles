@@ -44,7 +44,7 @@
         "tooltip": true, 
         "tooltip-format": "\n<tt>{calendar}</tt>",
         "calendar": {
-            "mode"          : "mounth",
+            "mode"          : "month",
             "mode-mon-col"  : 3,
             "on-scroll"     : 1,
             "format": {
@@ -57,7 +57,7 @@
         "actions":  {
             "on-click": "mode",
             "on-click-right": "shift_up",
-            "on-clcik-middle": "shift_down"
+            "on-click-middle": "shift_down"
         }
     },
 
