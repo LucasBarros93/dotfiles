@@ -1,5 +1,4 @@
 return {
-    -- Mason: gerenciador de servidores
     {
         "williamboman/mason.nvim",
         lazy = false,
@@ -8,30 +7,33 @@ return {
         end,
     },
 
-    -- Ponte entre mason e lspconfig
     {
         "williamboman/mason-lspconfig.nvim",
         lazy = false,
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    "lua_ls",  -- Lua
-                    "gopls",   -- Go
-                    "clangd",  -- C/C++
+                    "lua_ls",
+                    "gopls",
+                    "clangd",
+                    "pyright",
                 },
                 automatic_installation = true,
             })
         end,
     },
 
-    -- nvim-lspconfig (só para habilitar os servers via nova API)
     {
         "neovim/nvim-lspconfig",
         lazy = false,
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+        },
         config = function()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            -- Lua
             vim.lsp.config("lua_ls", {
+                capabilities = capabilities,
                 settings = {
                     Lua = {
                         diagnostics = {
@@ -45,16 +47,20 @@ return {
                 },
             })
 
-            -- Go
-            vim.lsp.config("gopls", {})
+            vim.lsp.config("gopls", {
+                capabilities = capabilities,
+            })
 
-            -- C/C++
-            vim.lsp.config("clangd", {})
+            vim.lsp.config("clangd", {
+                capabilities = capabilities,
+            })
 
-            -- Habilita os servidores
+            vim.lsp.config("pyright", {
+                capabilities = capabilities,
+            })
+
             vim.lsp.enable({ "lua_ls", "gopls", "clangd", "pyright" })
 
-            -- Keymaps (só ativam quando LSP conecta no buffer)
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(event)
                     local opts = { buffer = event.buf }
@@ -72,7 +78,6 @@ return {
                 end,
             })
 
-            -- Diagnósticos
             vim.diagnostic.config({
                 virtual_text = true,
                 signs = true,
