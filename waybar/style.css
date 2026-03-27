@@ -61,7 +61,7 @@ window#waybar {
 
 #clockmodule,
 #battery,
-#temperature,
+#custom-updates,
 #hardware,
 #soundlight,
 #media,
@@ -193,11 +193,11 @@ tooltip {
 #backlightmodule:hover #backlight-slider { min-width: 70px; }
 #backlightmodule:hover #backlight-slider trough { min-height: 2px; min-width: 70px; }
 
-#temperature {
+#custom-updates {
     color: @orange;
 }
 
-#temperature.critical {
+#custom-updates.outdated {
     color: @red;
 }
 

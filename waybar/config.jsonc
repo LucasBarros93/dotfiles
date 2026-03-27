@@ -14,7 +14,7 @@
         "niri/workspaces"
     ],
     "modules-right": [
-        "temperature",
+        "custom/updates",
         "group/hardware",
         "battery"
     ],
@@ -204,13 +204,13 @@
         "on-scroll-up": "playerctl position 5+",
         "on-scroll-down": "playerctl position 5-"
     },
-
-    "temperature": {
-        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
-        "critical-threshold": 80,
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", "", ""],
-        "tooltip": false
+    "custom/updates": {
+        "format": "{} ",
+        "exec": "~/.config/waybar/scripts/updates.sh",
+        "return-type": "json",
+        "interval": 3600,
+        "on-click": "kitty --class=kitty-float -e yay -Syu",
+        "tooltip": true
     },
     "battery": {
         "states": {
