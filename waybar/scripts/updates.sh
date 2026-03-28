@@ -1,24 +1,14 @@
 #!/bin/bash
 
-# Conta atualizações oficiais
-pac=$(checkupdates 2>/dev/null)
-pac_count=$(echo "$pac" | wc -w | awk '{print $1}')
-if [ -z "$pac" ]; then pac_count=0; else pac_count=$(echo "$pac" | wc -l); fi
+# Verifica updates do pacman + AUR (se tiver yay/paru)
+PACMAN_UPDATES=$(checkupdates 2>/dev/null | wc -l)
 
-# Conta atualizações do AUR (remova estas 3 linhas se não usar AUR)
-aur=$(yay -Qua 2>/dev/null)
-if [ -z "$aur" ]; then aur_count=0; else aur_count=$(echo "$aur" | wc -l); fi
+AUR_UPDATES=$(yay -Qua 2>/dev/null | wc -l)
 
-# Total
-total=$((pac_count + aur_count))
+TOTAL=$((PACMAN_UPDATES + AUR_UPDATES))
 
-if [ "$total" -gt 15 ]; then
-    # Gera uma lista para o tooltip (o que aparece quando passa o mouse)
-    tooltip="Pacman: $pac_count\nAUR: $aur_count\n\nPacotes:\n$pac\n$aur"
-    # Escapa quebras de linha para o formato JSON
-    tooltip=$(echo "$tooltip" | sed -z 's/\n/\\n/g' | sed 's/\\n$//')
-    
-    echo "{\"text\": \"$total\", \"tooltip\": \"$tooltip\", \"class\": \"outdated\"}"
+if [ "$TOTAL" -gt 15 ]; then
+    echo "{\"text\": \" $TOTAL\", \"tooltip\": \"Pacman: $PACMAN_UPDATES  AUR: $AUR_UPDATES\", \"class\": \"outdated\"}"
 else
-    echo "{\"text\": \"0\", \"tooltip\": \"System is updated!\", \"class\": \"updated\"}"
+    echo "{\"text\": \" $TOTAL\", \"tooltip\": \"Pacman: $PACMAN_UPDATES  AUR: $AUR_UPDATES\", \"class\": \"updated\"}"
 fi
