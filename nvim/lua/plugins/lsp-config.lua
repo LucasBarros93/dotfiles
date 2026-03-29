@@ -16,7 +16,6 @@ return {
                     "lua_ls",
                     "gopls",
                     "clangd",
-                    "pyright",
                 },
                 automatic_installation = true,
             })
@@ -79,7 +78,7 @@ return {
             })
 
             vim.diagnostic.config({
-                virtual_text = true,
+                virtual_text = false, --true,
                 signs = true,
                 underline = true,
                 update_in_insert = false,

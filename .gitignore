@@ -7,3 +7,4 @@
 /nvim/lazy-lock.json
 *.local
 *.local.*
+.luarc.json
