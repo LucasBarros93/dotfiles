@@ -1,0 +1,43 @@
+@define-color bg rgba(26, 28, 35, 0.7);
+@define-color purple #B877DB;
+@define-color blur-purple rgba(184, 119, 219, 0.2);
+
+window {
+    background-color: transparent; /* Deixe a janela transparente */
+    font-family: "FantasqueSansM Nerd Font";
+    color: @purple;
+}
+
+#outer-box {
+    background-color: @bg;
+    border: 1px solid @purple;
+    border-radius: 12px;
+    padding: 10px; /* Espaçamento interno para o conteúdo não colar na borda branca */
+}
+
+#input {
+    background: transparent;
+    margin: 10px 10px 20px 10px;
+    padding: 8px;
+    border-radius: 2px;
+    
+    border: none;
+    border-bottom: 1px solid @purple; 
+    color: @purple;
+}
+
+#entry:selected {
+    background-color: @blur-purple;
+    color: #ffffff;
+    border-radius: 6px;
+}
+
+#input:focus {
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+#input > image {
+    color: @purple;
+}
