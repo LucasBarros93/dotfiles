@@ -89,6 +89,7 @@ function fish_prompt
     end
 
     # --- Prompt em 2 linhas ---
+    echo
     # Linha 1: usuário | diretório | git
     echo -e "$user_color$USER$reset$bold_white in $reset$blue$cwd$reset$git_info"
 
