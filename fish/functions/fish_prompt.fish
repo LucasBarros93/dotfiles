@@ -69,10 +69,10 @@ function fish_prompt
                 set -l behind (echo $counts | awk '{print $2}')
 
                 if test "$ahead" -gt 0
-                    set git_icons "$git_icons $blue$ahead"
+                    set git_icons "$git_icons $blue$ahead"
                 end
                 if test "$behind" -gt 0
-                    set git_icons "$git_icons $blue$behind"
+                    set git_icons "$git_icons $blue$behind"
                 end
             end
 
