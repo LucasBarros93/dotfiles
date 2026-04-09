@@ -199,8 +199,12 @@ tooltip {
 }
 
 #custom-updates.outdated {
-    margin-left: 2px;
     color: @red;
+}
+
+#custom-updates.offline {
+    margin-left: 0px;
+    color: @gray;
 }
 
 #mpris {

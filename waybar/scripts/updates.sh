@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Testa internet
+if ! curl -s --max-time 3 https://archlinux.org >/dev/null; then
+    echo '{"text": "", "tooltip": "Offline :(", "class": "offline"}'
+    exit 0
+fi
+
 # Verifica updates do pacman + AUR (se tiver yay/paru)
 PACMAN_UPDATES=$(checkupdates 2>/dev/null | wc -l)
 

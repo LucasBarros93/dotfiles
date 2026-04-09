@@ -13,7 +13,6 @@ return {
 					"shfmt",
 					"gofumpt",
 					"goimports",
-					"clang-format",
 				},
 			})
 		end,
@@ -34,8 +33,6 @@ return {
 					sh = { "shfmt" },
 					bash = { "shfmt" },
 					go = { "goimports", "gofumpt" }, -- roda em sequência
-					c = { "clang_format" },
-					cpp = { "clang_format" },
 				},
 
 				-- ────────────────────────────────────────
